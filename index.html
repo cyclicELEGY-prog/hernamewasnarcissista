@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Your Album Title – Official Page</title>
+  <title>CyclicElegy – The Monster that lives on 2120 Samuel Drive</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     :root {
@@ -112,7 +112,6 @@
       }
     }
 
-    /* Left column: hero + buttons */
     .hero-card {
       background: linear-gradient(135deg, rgba(22, 26, 52, 0.96), rgba(11, 14, 30, 0.98));
       border-radius: 24px;
@@ -266,7 +265,7 @@
     }
 
     .album-art::after {
-      content: "YOUR ALBUM TITLE";
+      content: "The Monster that lives on 2120 Samuel Drive";
       position: absolute;
       left: 50%;
       top: 50%;
@@ -289,7 +288,6 @@
       background: radial-gradient(circle at 30% 30%, rgba(0, 0, 0, 0.2), transparent 50%);
     }
 
-    /* Right column: content sections */
     .panel {
       background: linear-gradient(145deg, rgba(13, 16, 30, 0.97), rgba(5, 7, 18, 0.98));
       border-radius: 24px;
@@ -420,7 +418,6 @@
       }
     }
 
-    /* Scrollbar */
     .panel-inner::-webkit-scrollbar {
       width: 6px;
     }
@@ -438,8 +435,8 @@
     <div class="logo">
       <div class="logo-mark"></div>
       <div class="logo-text">
-        <h1><!-- YOUR ARTIST NAME HERE -->YOUR ARTIST NAME</h1>
-        <span>Album: <!-- YOUR ALBUM TITLE HERE -->Your Album Title</span>
+        <h1>CyclicElegy</h1>
+        <span>Album: The Monster that lives on 2120 Samuel Drive</span>
       </div>
     </div>
     <div class="tagline">
@@ -452,19 +449,21 @@
     <section class="hero-card" aria-label="Album navigation">
       <div class="hero-inner">
         <div class="album-info">
-          <h2><span><!-- OPTIONAL WORD LIKE “Project” OR “Album” -->Album</span> • YOUR ALBUM TITLE</h2>
+          <h2><span>Album</span> • The Monster that lives on 2120 Samuel Drive</h2>
           <div class="album-subline">
-            <!-- SHORT TAGLINE ABOUT THE ALBUM -->
-            A concept album about surviving narcissistic abuse and finding a way back to yourself.
+            A concept album about what really happened inside 2120 Samuel Drive – narcissistic abuse,
+            a mind breaking under it, and the fight to crawl back out.
           </div>
           <p class="album-desc">
-            This site brings together the songs, lyrics, artwork, and the real story behind the album:
-            my experiences with mental health, emotional and physical abuse, and how creating this
-            record became a lifeline.
+            <em>The Monster that lives on 2120 Samuel Drive</em> is my way of taking back the story.
+            These songs, lyrics, and visuals come from my real experiences with mental illness,
+            emotional and physical abuse, and the slow process of realizing what narcissistic
+            behavior was doing to me. This album is the sound of me learning the truth, speaking
+            it out loud, and choosing to keep going.
           </p>
           <div class="content-warning">
             <span class="icon"></span>
-            Contains discussion of mental health, emotional abuse, and narcissistic behavior.
+            Contains discussion of mental health, emotional abuse, and suicidal thoughts.
           </div>
 
           <div class="button-grid">
@@ -475,6 +474,7 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
             <button class="nav-button" data-target="lyrics">
               <div>
                 <span class="label-main">Lyrics & Tracklist</span><br />
@@ -482,6 +482,15 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
+            <button class="nav-button" data-target="about-album">
+              <div>
+                <span class="label-main">About This Album</span><br />
+                <span class="label-sub">Who I am and why this exists</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+
             <button class="nav-button" data-target="my-mental-health">
               <div>
                 <span class="label-main">My Mental Health Story</span><br />
@@ -489,6 +498,7 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
             <button class="nav-button" data-target="definitions">
               <div>
                 <span class="label-main">Definitions & Terms</span><br />
@@ -496,6 +506,7 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
             <button class="nav-button" data-target="about-narcissism">
               <div>
                 <span class="label-main">What Is Narcissism?</span><br />
@@ -503,6 +514,15 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
+            <button class="nav-button" data-target="dark-triad">
+              <div>
+                <span class="label-main">The Dark Triad</span><br />
+                <span class="label-sub">Narcissism, control, and coldness</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+
             <button class="nav-button" data-target="dark-side">
               <div>
                 <span class="label-main">The Dark Side</span><br />
@@ -510,6 +530,15 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
+            <button class="nav-button" data-target="narcissist-veil">
+              <div>
+                <span class="label-main">The Veil & The Mask</span><br />
+                <span class="label-sub">When the act falls apart</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+
             <button class="nav-button" data-target="survivor-experience">
               <div>
                 <span class="label-main">Being On the Other Side</span><br />
@@ -517,6 +546,7 @@
               </div>
               <span class="chevron">→</span>
             </button>
+
             <button class="nav-button" data-target="healing">
               <div>
                 <span class="label-main">Healing & Catharsis</span><br />
@@ -534,9 +564,6 @@
 
         <div class="album-art" aria-hidden="true">
           <div class="album-art-overlay"></div>
-          <!-- REPLACE THIS WHOLE DIV WITH AN <img> IF YOU HAVE FINAL COVER ART:
-          <img src="PATH-TO-YOUR-ART.jpg" alt="Album cover for YOUR ALBUM TITLE" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
-          -->
         </div>
       </div>
     </section>
@@ -549,21 +576,19 @@
           <div class="section-subtitle">Album Art & Imagery</div>
           <div class="section-body">
             <p>
-              <!-- DESCRIBE YOUR VISUAL CONCEPT -->
               The visuals for this album are built around contrast: light vs. dark, chaos vs. stillness,
               and the feeling of being trapped inside someone else’s story while trying to write your own.
             </p>
 
             <div class="subheading">Featured Pieces</div>
             <ul>
-              <li><strong>Cover Art:</strong> <!-- Describe your cover art / symbolism. --></li>
-              <li><strong>Inner Artwork:</strong> <!-- Talk about sketches, collages, photos, etc. --></li>
-              <li><strong>Symbols:</strong> <!-- Describe any recurring icons (mirrors, masks, rooms, etc.). --></li>
+              <li><strong>Cover Art:</strong> Describe your cover art / symbolism here.</li>
+              <li><strong>Inner Artwork:</strong> Talk about sketches, collages, photos, etc.</li>
+              <li><strong>Symbols:</strong> Mirrors, masks, rooms, streets, houses – whatever repeats.</li>
             </ul>
 
-            <!-- IF YOU HAVE IMAGE LINKS, LIST THEM HERE -->
             <p class="note">
-              You can add direct links here to your artwork on Instagram, Google Drive, or any image host.
+              You can add direct links here to your artwork on Instagram, Drive, or any image host.
             </p>
           </div>
         </section>
@@ -580,13 +605,4 @@
 
             <div class="subheading">Tracklist</div>
             <ul>
-              <li><strong>Track 1 –</strong> <!-- Title, short meaning. --></li>
-              <li><strong>Track 2 –</strong> <!-- Title, short meaning. --></li>
-              <li><strong>Track 3 –</strong> <!-- Title, short meaning. --></li>
-              <!-- ADD MORE TRACKS AS NEEDED -->
-            </ul>
-
-            <div class="subheading">Sample Lyrics</div>
-            <p class="quote">
-              <!-- PUT A SHORT LYRIC QUOTE HERE -->
-              "Replace this line with a lyric that captures how it felt
+              <li><strong>Track 1 – Slow Dance in the Dark</strong> – A suicidal escape fantasy born from not being able
