@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Your Album Title – Official Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #05060a;
+      --bg-alt: #101320;
+      --accent: #e63973;
+      --accent-soft: #ff8fb4;
+      --text: #f5f5f7;
+      --text-muted: #b4b7c3;
+      --card: #161927;
+      --border: #292c3a;
+      --shadow: 0 18px 45px rgba(0, 0, 0, 0.6);
+      --radius-lg: 16px;
+      --radius-full: 999px;
+      --transition: 220ms ease-out;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #1b1d35 0, #05060a 45%, #000 100%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    a {
+      color: var(--accent-soft);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    header {
+      padding: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 20%, #ff8fb4 0, #e63973 35%, transparent 65%),
+                  radial-gradient(circle at 70% 80%, #4b6fff 0, #171930 55%);
+      box-shadow: 0 0 30px rgba(230, 57, 115, 0.6);
+    }
+
+    .logo-text {
+      line-height: 1.1;
+    }
+
+    .logo-text h1 {
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-soft);
+    }
+
+    .logo-text span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      max-width: 260px;
+      text-align: right;
+    }
+
+    main {
+      flex: 1;
+      padding: 0 clamp(1.5rem, 4vw, 3.5rem) 2rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 2rem;
+    }
+
+    @media (max-width: 860px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .tagline {
+        text-align: left;
+        max-width: 100%;
+      }
+    }
+
+    /* Left column: hero + buttons */
+    .hero-card {
+      background: linear-gradient(135deg, rgba(22, 26, 52, 0.96), rgba(11, 14, 30, 0.98));
+      border-radius: 24px;
+      padding: 1.6rem 1.6rem 1.2rem;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: 
+        radial-gradient(circle at 10% 0%, rgba(230, 57, 115, 0.16), transparent 60%),
+        radial-gradient(circle at 80% 100%, rgba(75, 111, 255, 0.2), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    @media (max-width: 720px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .album-info h2 {
+      font-size: clamp(1.6rem, 2.7vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-bottom: 0.4rem;
+    }
+
+    .album-info h2 span {
+      color: var(--accent-soft);
+    }
+
+    .album-subline {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.9rem;
+    }
+
+    .album-desc {
+      font-size: 0.92rem;
+      color: var(--text);
+      max-width: 540px;
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
+
+    .content-warning {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(5, 6, 10, 0.6);
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.3rem 0.75rem;
+      border: 1px solid rgba(230, 57, 115, 0.35);
+      margin-bottom: 1.2rem;
+    }
+
+    .content-warning span.icon {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(230, 57, 115, 0.8);
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 0.4rem;
+    }
+
+    button.nav-button {
+      background: rgba(8, 10, 26, 0.85);
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      padding: 0.6rem 0.85rem;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition),
+                  box-shadow var(--transition), border-color var(--transition);
+      backdrop-filter: blur(8px);
+    }
+
+    button.nav-button span.label-main {
+      font-weight: 500;
+    }
+
+    button.nav-button span.label-sub {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+    }
+
+    button.nav-button span.chevron {
+      font-size: 1rem;
+      color: var(--accent-soft);
+    }
+
+    button.nav-button:hover {
+      background: rgba(16, 19, 52, 0.98);
+      transform: translateY(-1px);
+      box-shadow: 0 9px 22px rgba(0, 0, 0, 0.55);
+      border-color: rgba(230, 57, 115, 0.55);
+    }
+
+    .hero-footnote {
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+    }
+
+    .album-art {
+      justify-self: center;
+      max-width: 240px;
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 24px;
+      background:
+        radial-gradient(circle at 10% 10%, #ff8fb4 0, transparent 55%),
+        radial-gradient(circle at 110% 0%, #4b6fff 0, transparent 45%),
+        radial-gradient(circle at 50% 130%, #ffcf71 0, transparent 40%),
+        linear-gradient(135deg, #1d1022, #020310);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.75),
+        0 0 0 1px rgba(255, 255, 255, 0.03);
+    }
+
+    .album-art::after {
+      content: "YOUR ALBUM TITLE";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 0 1.5rem;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.8);
+      mix-blend-mode: screen;
+    }
+
+    .album-art-overlay {
+      position: absolute;
+      inset: 12%;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(4px);
+      background: radial-gradient(circle at 30% 30%, rgba(0, 0, 0, 0.2), transparent 50%);
+    }
+
+    /* Right column: content sections */
+    .panel {
+      background: linear-gradient(145deg, rgba(13, 16, 30, 0.97), rgba(5, 7, 18, 0.98));
+      border-radius: 24px;
+      padding: 1rem 1.4rem 1.4rem;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -25%;
+      background:
+        radial-gradient(circle at 10% 0%, rgba(75, 111, 255, 0.2), transparent 60%),
+        radial-gradient(circle at 85% 100%, rgba(230, 57, 115, 0.22), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .panel-inner {
+      position: relative;
+      z-index: 1;
+      max-height: min(70vh, 520px);
+      overflow: auto;
+      padding-right: 0.4rem;
+    }
+
+    .section {
+      display: none;
+      animation: fadeIn 220ms ease-out;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--accent-soft);
+      margin-bottom: 0.2rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 0.8rem;
+      color: #ffffff;
+    }
+
+    .section-body {
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    .section-body p + p {
+      margin-top: 0.7rem;
+    }
+
+    .subheading {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      margin-top: 1rem;
+      margin-bottom: 0.4rem;
+      color: var(--text-muted);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0.3rem 0 0.8rem;
+    }
+
+    ul li {
+      position: relative;
+      padding-left: 1.1rem;
+      margin-bottom: 0.45rem;
+      color: var(--text);
+      font-size: 0.88rem;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0.2rem;
+      color: var(--accent-soft);
+    }
+
+    .quote {
+      border-left: 2px solid rgba(230, 57, 115, 0.5);
+      padding-left: 0.75rem;
+      margin: 0.7rem 0;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .definition {
+      background: rgba(5, 6, 10, 0.7);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 0.6rem 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .definition strong {
+      font-size: 0.87rem;
+    }
+
+    .note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 0.7rem;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Scrollbar */
+    .panel-inner::-webkit-scrollbar {
+      width: 6px;
+    }
+    .panel-inner::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .panel-inner::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <h1><!-- YOUR ARTIST NAME HERE -->YOUR ARTIST NAME</h1>
+        <span>Album: <!-- YOUR ALBUM TITLE HERE -->Your Album Title</span>
+      </div>
+    </div>
+    <div class="tagline">
+      A personal journey through mental health, survival, and reclaiming yourself
+      from emotional abuse – told through music, words, and art.
+    </div>
+  </header>
+
+  <main>
+    <section class="hero-card" aria-label="Album navigation">
+      <div class="hero-inner">
+        <div class="album-info">
+          <h2><span><!-- OPTIONAL WORD LIKE “Project” OR “Album” -->Album</span> • YOUR ALBUM TITLE</h2>
+          <div class="album-subline">
+            <!-- SHORT TAGLINE ABOUT THE ALBUM -->
+            A concept album about surviving narcissistic abuse and finding a way back to yourself.
+          </div>
+          <p class="album-desc">
+            This site brings together the songs, lyrics, artwork, and the real story behind the album:
+            my experiences with mental health, emotional and physical abuse, and how creating this
+            record became a lifeline.
+          </p>
+          <div class="content-warning">
+            <span class="icon"></span>
+            Contains discussion of mental health, emotional abuse, and narcissistic behavior.
+          </div>
+
+          <div class="button-grid">
+            <button class="nav-button" data-target="art">
+              <div>
+                <span class="label-main">Album Art & Visuals</span><br />
+                <span class="label-sub">Images that mirror the music</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="lyrics">
+              <div>
+                <span class="label-main">Lyrics & Tracklist</span><br />
+                <span class="label-sub">Words behind every song</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="my-mental-health">
+              <div>
+                <span class="label-main">My Mental Health Story</span><br />
+                <span class="label-sub">Living with it day to day</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="definitions">
+              <div>
+                <span class="label-main">Definitions & Terms</span><br />
+                <span class="label-sub">The diagnoses I live with</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="about-narcissism">
+              <div>
+                <span class="label-main">What Is Narcissism?</span><br />
+                <span class="label-sub">Understanding the patterns</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="dark-side">
+              <div>
+                <span class="label-main">The Dark Side</span><br />
+                <span class="label-sub">Abuse from my perspective</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="survivor-experience">
+              <div>
+                <span class="label-main">Being On the Other Side</span><br />
+                <span class="label-sub">What I went through</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+            <button class="nav-button" data-target="healing">
+              <div>
+                <span class="label-main">Healing & Catharsis</span><br />
+                <span class="label-sub">How this album saved me</span>
+              </div>
+              <span class="chevron">→</span>
+            </button>
+          </div>
+
+          <div class="hero-footnote">
+            Click a button to switch the story panel on the right. Feel free to share this site
+            with anyone who might need to hear they’re not alone.
+          </div>
+        </div>
+
+        <div class="album-art" aria-hidden="true">
+          <div class="album-art-overlay"></div>
+          <!-- REPLACE THIS WHOLE DIV WITH AN <img> IF YOU HAVE FINAL COVER ART:
+          <img src="PATH-TO-YOUR-ART.jpg" alt="Album cover for YOUR ALBUM TITLE" style="width:100%;height:100%;object-fit:cover;border-radius:24px;" />
+          -->
+        </div>
+      </div>
+    </section>
+
+    <aside class="panel" aria-label="Content section">
+      <div class="panel-inner">
+        <!-- ART SECTION -->
+        <section id="art" class="section active">
+          <div class="section-title">Visual Side</div>
+          <div class="section-subtitle">Album Art & Imagery</div>
+          <div class="section-body">
+            <p>
+              <!-- DESCRIBE YOUR VISUAL CONCEPT -->
+              The visuals for this album are built around contrast: light vs. dark, chaos vs. stillness,
+              and the feeling of being trapped inside someone else’s story while trying to write your own.
+            </p>
+
+            <div class="subheading">Featured Pieces</div>
+            <ul>
+              <li><strong>Cover Art:</strong> <!-- Describe your cover art / symbolism. --></li>
+              <li><strong>Inner Artwork:</strong> <!-- Talk about sketches, collages, photos, etc. --></li>
+              <li><strong>Symbols:</strong> <!-- Describe any recurring icons (mirrors, masks, rooms, etc.). --></li>
+            </ul>
+
+            <!-- IF YOU HAVE IMAGE LINKS, LIST THEM HERE -->
+            <p class="note">
+              You can add direct links here to your artwork on Instagram, Google Drive, or any image host.
+            </p>
+          </div>
+        </section>
+
+        <!-- LYRICS SECTION -->
+        <section id="lyrics" class="section">
+          <div class="section-title">Lyrics</div>
+          <div class="section-subtitle">Tracklist & Words</div>
+          <div class="section-body">
+            <p>
+              Every song on this album is tied to a specific moment in my relationship, my mental health,
+              or the process of leaving and rebuilding myself.
+            </p>
+
+            <div class="subheading">Tracklist</div>
+            <ul>
+              <li><strong>Track 1 –</strong> <!-- Title, short meaning. --></li>
+              <li><strong>Track 2 –</strong> <!-- Title, short meaning. --></li>
+              <li><strong>Track 3 –</strong> <!-- Title, short meaning. --></li>
+              <!-- ADD MORE TRACKS AS NEEDED -->
+            </ul>
+
+            <div class="subheading">Sample Lyrics</div>
+            <p class="quote">
+              <!-- PUT A SHORT LYRIC QUOTE HERE -->
+              "Replace this line with a lyric that captures how it felt
