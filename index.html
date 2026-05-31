@@ -441,7 +441,15 @@
   </style>
 </head>
 <body>
-  <header>
+  <div class="video-banner">
+    <video class="video-banner__video" autoplay muted loop playsinline>
+      <source src="Banner.mp4" type="video/mp4" />
+    </video>
+
+    <div class="video-banner__overlay"></div>
+
+    <header>
+
     <div class="logo">
       <div class="logo-mark"></div>
       <div class="logo-text">
@@ -453,7 +461,9 @@
       A personal journey through mental health, survival, and reclaiming yourself
       from emotional abuse – told through music, words, and art.
     </div>
-  </header>
+      </header>
+  </div> <!-- end .video-banner -->
+
 
   <main>
     <section class="hero-card" aria-label="Album navigation">
