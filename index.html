@@ -1014,11 +1014,11 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
               overreacting for wanting to get out.
             </p>
           </div>
-          <div id="hidden-game-container" style="display:none; position:relative; text-align:center; padding:12px 0 18px;">
+         <div id="hidden-game-container" style="display:none; position:relative; text-align:center; padding:12px 0 18px;">
   <a id="gameLink" href="game.html" aria-label="Open hidden game">
     <video id="hiddenGameVideo" src="assets/hiddengamestartbutton.mp4" loop muted playsinline preload="auto" style="display:inline-block; width:260px; max-width:90%; height:auto; border-radius:8px;"></video>
   </a>
-          </div>
+         </div>
         </section>
 
         <!-- DARK SIDE -->
@@ -1326,24 +1326,48 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
       });
     });
   </script>
+
+</script>
+   <script></script>
 (function(){
-  const CLICK_TARGET = document.querySelector('button.nav-button[data-target="dark-triad"]');
   const REVEAL_COUNT = 6;
   const STORAGE_KEY = 'darkTriad_click_count_v1';
   const container = document.getElementById('hidden-game-container');
   const video = document.getElementById('hiddenGameVideo');
-  if(!CLICK_TARGET || !container || !video) return;
+  if(!container || !video) return;
+
   let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
   function updateStorage(){ localStorage.setItem(STORAGE_KEY, String(count)); }
-  function reveal(){ container.style.display = 'block'; video.play().catch(()=>{}); }
+  function reveal(){
+    container.style.display = 'block';
+    video.play().catch(()=>{ /* autoplay may be blocked on mobile; user tap will start */ });
+  }
   if(count >= REVEAL_COUNT) reveal();
-  CLICK_TARGET.addEventListener('click', ()=>{
-    count = Math.min(REVEAL_COUNT, count + 1);
-    updateStorage();
-    if(count >= REVEAL_COUNT) reveal();
-  });
+
+  // Try common selectors for your Dark Triad button/tab
+  const targets = Array.from(document.querySelectorAll(
+    'a[href="#dark-triad"], button[data-target="dark-triad"], [data-target="dark-triad"], button.nav-button[data-target="dark-triad"], .dark-triad, #dark-triad'
+  ));
+
+  if(targets.length){
+    targets.forEach(t => t.addEventListener('click', ()=>{
+      count = Math.min(REVEAL_COUNT, count + 1);
+      updateStorage();
+      if(count >= REVEAL_COUNT) reveal();
+    }));
+  } else {
+    // Fallback: count clicks on any element whose text contains "Dark Triad"
+    document.addEventListener('click', function(e){
+      const t = e.target;
+      if(t && t.textContent && /dark triad/i.test(t.textContent)){
+        count = Math.min(REVEAL_COUNT, count + 1);
+        updateStorage();
+        if(count >= REVEAL_COUNT) reveal();
+      }
+    }, {capture:true});
+  }
 })();
-</script>
+</script>     
 </body>
 </html>
 
