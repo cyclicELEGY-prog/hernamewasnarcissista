@@ -195,3 +195,6 @@ a:focus,button:focus,input:focus{outline:3px solid rgba(111,211,255,0.18);outlin
   .hero{padding:2rem 1rem}
   .player{flex-direction:column;align-items:stretch}
 }
+
+#hidden-game-container { position:relative; left:0; right:0; bottom:0; z-index:80; display:none; }
+#hidden-game-container video { box-shadow:0 6px 18px rgba(0,0,0,0.5); cursor:pointer; }                                                             
