@@ -1014,6 +1014,11 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
               overreacting for wanting to get out.
             </p>
           </div>
+          <div id="hidden-game-container" style="display:none; position:relative; text-align:center; padding:12px 0 18px;">
+  <a id="gameLink" href="game.html" aria-label="Open hidden game">
+    <video id="hiddenGameVideo" src="assets/hiddengamestartbutton.mp4" loop muted playsinline preload="auto" style="display:inline-block; width:260px; max-width:90%; height:auto; border-radius:8px;"></video>
+  </a>
+          </div>
         </section>
 
         <!-- DARK SIDE -->
@@ -1321,6 +1326,24 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
       });
     });
   </script>
+(function(){
+  const CLICK_TARGET = document.querySelector('button.nav-button[data-target="dark-triad"]');
+  const REVEAL_COUNT = 6;
+  const STORAGE_KEY = 'darkTriad_click_count_v1';
+  const container = document.getElementById('hidden-game-container');
+  const video = document.getElementById('hiddenGameVideo');
+  if(!CLICK_TARGET || !container || !video) return;
+  let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
+  function updateStorage(){ localStorage.setItem(STORAGE_KEY, String(count)); }
+  function reveal(){ container.style.display = 'block'; video.play().catch(()=>{}); }
+  if(count >= REVEAL_COUNT) reveal();
+  CLICK_TARGET.addEventListener('click', ()=>{
+    count = Math.min(REVEAL_COUNT, count + 1);
+    updateStorage();
+    if(count >= REVEAL_COUNT) reveal();
+  });
+})();
+</script>
 </body>
 </html>
 
