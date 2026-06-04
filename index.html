@@ -1326,29 +1326,24 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
       });
     });
   </script>
-
+    }, {capture:true});
+  }
+})();
 </script>
-   <script></script>
+  <script>
 (function(){
   const REVEAL_COUNT = 6;
   const STORAGE_KEY = 'darkTriad_click_count_v1';
   const container = document.getElementById('hidden-game-container');
   const video = document.getElementById('hiddenGameVideo');
   if(!container || !video) return;
-
   let count = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
   function updateStorage(){ localStorage.setItem(STORAGE_KEY, String(count)); }
-  function reveal(){
-    container.style.display = 'block';
-    video.play().catch(()=>{ /* autoplay may be blocked on mobile; user tap will start */ });
-  }
+  function reveal(){ container.style.display = 'block'; video.play().catch(()=>{}); }
   if(count >= REVEAL_COUNT) reveal();
-
-  // Try common selectors for your Dark Triad button/tab
   const targets = Array.from(document.querySelectorAll(
     'a[href="#dark-triad"], button[data-target="dark-triad"], [data-target="dark-triad"], button.nav-button[data-target="dark-triad"], .dark-triad, #dark-triad'
   ));
-
   if(targets.length){
     targets.forEach(t => t.addEventListener('click', ()=>{
       count = Math.min(REVEAL_COUNT, count + 1);
@@ -1356,7 +1351,6 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
       if(count >= REVEAL_COUNT) reveal();
     }));
   } else {
-    // Fallback: count clicks on any element whose text contains "Dark Triad"
     document.addEventListener('click', function(e){
       const t = e.target;
       if(t && t.textContent && /dark triad/i.test(t.textContent)){
@@ -1367,8 +1361,6 @@ Your narcissistic pessimistic psychopathy, it really took a toll on me
     }, {capture:true});
   }
 })();
-</script>     
+</script>
 </body>
 </html>
-
-
